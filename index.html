@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Task Manager</title>
+
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6f9;
+    }
+
+    .wrapper {
+        width: 380px;
+        margin: 80px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 70%;
+        padding: 6px;
+    }
+
+    button {
+        padding: 6px 10px;
+        margin-left: 4px;
+        cursor: pointer;
+    }
+
+    ol {
+        padding-left: 20px;
+        margin-top: 15px;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: green;
+    }
+</style>
+
+</head>
+
+<body>
+
+    <h1>My Task Manager</h1>
+
+    <input type="text" id="inputTask" placeholder="Enter a task">
+
+    <button id="taskAddBtn">Add Task</button>
+
+    <ol id="listTask"></ol>
+
+    <p>Total Tasks: <span id="totalCount">0</span></p>
+    <p>Completed Tasks: <span id="completedCount">0</span></p>
+
+    <script>
+        const inputTask = document.getElementById("inputTask");
+        const taskAddBtn = document.getElementById("taskAddBtn");
+        const listTask = document.getElementById("listTask");
+        const totalCount = document.getElementById("totalCount");
+        const completedCount = document.getElementById("completedCount");
+
+        function updateCounts() {
+            const tasks = listTask.children;
+            totalCount.textContent = tasks.length;
+
+            let completed = 0;
+            for (let task of tasks) {
+                const span = task.querySelector("span");
+                if (span.classList.contains("completed")) {
+                    completed++;
+                }
+            }
+            completedCount.textContent = completed;
+        }
+
+        inputTask.addEventListener("input", function () {
+            taskAddBtn.disabled = inputTask.value.trim() === "";
+
+        });
+
+        taskAddBtn.addEventListener("click", function () {
+            const TxtTask = inputTask.value.trim();
+
+            if (TxtTask === "") {
+                return;
+            }
+
+            const li = document.createElement("li");
+
+            const span = document.createElement("span");
+            span.textContent = TxtTask;
+
+            const completeBtn = document.createElement("button");
+            completeBtn.textContent = "Complete";
+            completeBtn.addEventListener("click", function () {
+                span.classList.toggle("completed");
+                updateCounts();
+            });
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.addEventListener("click", function () {
+                li.remove();
+                updateCounts();
+            });
+
+            li.appendChild(span);
+            li.appendChild(completeBtn);
+            li.appendChild(deleteBtn);
+
+            listTask.appendChild(li);
+            updateCounts();
+            inputTask.value = "";
+        });
+    </script>
+
+</body>
+
+</html>
