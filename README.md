@@ -1,7 +1,7 @@
 # JavaScript Task Manager
 
 A simple and interactive Task Manager web application built using **HTML, CSS, and Vanilla JavaScript**.  
-This project was developed as part of the **Sankey Solution Internship JavaScript Evaluation Task**.
+This project was developed as part of the **Sankey Solution Training JavaScript Evaluation Task**.
 
 ## Features
 - Add new tasks
