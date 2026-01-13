@@ -29,5 +29,5 @@ https://patil-shital-9236.github.io/task_manager_js/
 
 ## 🔹 Project Structure
 │
-├── index.html
+├── index.html<br>
 └── README.md
